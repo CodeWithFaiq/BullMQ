@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: . # Path to the directory containing the Dockerfile
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000" # Map host port 5000 to container port 5000
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379" # Map host port 6379 to container port 6379
